@@ -22,3 +22,15 @@ Si no hem instalat el ssh durant la instalacio de ubuntu farem la seguent comand
 ```bash
 sudo apt install openssh
 ```
+
+Un cop que ja tenim instalat el ssh el seguent pas sera veure la nostre ip amb la seguent comanda
+
+```bash
+ip addr show
+```
+Un cop que executem aquesta comanda veurem el seguent:
+
+![comanda per veure la ip](img/1.png)
+
+
+
