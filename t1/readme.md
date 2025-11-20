@@ -111,3 +111,5 @@ Com es garanteix que les dades de Comptabilitat/Clients compleixen amb el requis
 
  [Fase 1: Treball individual](fase1.md)
 
+ [Fase 2: Treball per parelles](fase2.md)
+
