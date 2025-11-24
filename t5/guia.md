@@ -105,6 +105,7 @@ sudo nano /etc/ssh/sshd_config
 
 
 En aquest cas he modificat al arxiu perque no es pogui inicar sessió amb l'usuari root i que unicament és pugi iniciar sessió amb usuari fent que nomes hi hagi un sol usuari per poder fer servir ssh.
+
 Per fer això podem modificar l'arxiu tal i com es veu a la foto
 
 ![editar l'arxiu de conf](img/8.png)
@@ -116,9 +117,78 @@ useradd -m -s /bin/bash usuari2
 ```
 Avans de comprobar si funciona haurem de colocar una contrasenya en el usuari2,que ho farem de la seguent manera
 
+```bash
+passwd usuari2
+```
+
+![Coloquem la contrasenya](img/9.png)
 
 Tot seguit comprobarem si podem realitzar ssh amb usuari2, per fer això farem la seguent comanda:
 
 ```bash
-useradd -m -s /bin/bash usuari2
+ssh usuari2@192.168.56.101
 ```
+
+Si intentem inicar sessio amb usuari2 per ssh podem veure que no es pot
+
+![Fer ssh usuari2](img/10.png)
+
+Tambe hem canviar l'arxiu fent que l'usuari root no pogui inicar sesio per ssh però si que pot fer login per local, per comprobar això primer intentarem fer ssh amb l'usuari root amb la segunet comanda 
+
+```bash
+ssh root@192.168.56.101
+```
+
+I podem veure que ens dona error.
+
+![Fer ssh amb root](img/11.png)
+
+En canvi si ho fem en local amb la comanda login podem veure que si que podrem inicar sessio, això ho farem amb la seguent comanda:
+
+```bash
+login root
+```
+
+![login amb root](img/12.png)
+
+Per tant podem confirmar que l'arxiu de configuració que hem editat previament funciona correctament.
+
+Mentre que amb usuari si que podem fer ssh
+
+![ssh amb usuari](img/13.png)
+
+Ara com ultim pas el que farem sera accedir amb un certificat en lloc de tindre que fer servir l'usuari i contrasenya
+
+Per fer això el primer pas sera obrir el powershell del client i escriure la seguent comanda
+
+```bash
+ssh-keygen -t rsa
+```
+Un cop escrita la comanda farem enter fins que vellem algo semblant a la foto
+
+![foto del keygen](img/14.png)
+
+El seguent pas sera fer ls a la ruta on s'ha guardat, la ruta per defecta ens surt on la comanda d'avans, en el meu cas sera la seguent
+
+```bash
+ls C:\Users\cfgm2smxb19/ .ssh
+```
+
+Podrem veure algo com això
+
+![comanda ls](img/15.png)
+
+I per ultim la seguent comanda sera
+
+```bash
+scp C:\Users\cfgm2smxb19\.ssh\id_rsa.pub usuari@192.168.56.101:
+```
+Podrem veure una cosa com la seguent
+
+![comanda ls](img/16.png)
+
+Un cop fet tot això continuarem amb Windows
+
+---
+
+# SSH Windows
