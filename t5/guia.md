@@ -171,7 +171,7 @@ Un cop escrita la comanda farem enter fins que vellem algo semblant a la foto
 El seguent pas sera fer ls a la ruta on s'ha guardat, la ruta per defecta ens surt on la comanda d'avans, en el meu cas sera la seguent
 
 ```bash
-ls C:\Users\cfgm2smxb19/ .ssh
+ls C:\Users\cfgm2smxb19\.ssh
 ```
 
 Podrem veure algo com això
@@ -181,14 +181,81 @@ Podrem veure algo com això
 I per ultim la seguent comanda sera
 
 ```bash
-scp C:\Users\cfgm2smxb19\.ssh\id_rsa.pub usuari@192.168.56.101:
+scp C:\Users\cfgm2smxb19\.ssh\id_rsa.pub usuari@192.168.56.101:/home/usuari
 ```
 Podrem veure una cosa com la seguent
 
-![comanda ls](img/16.png)
+![comanda scp](img/16.png)
+
+Un cop acabat això anirem al servidor ubuntu
+
+I per començar farem les haurem de crear la carpeta ssh i un arxiu dins de la carpeta que s'anomeni authorized_keys
+
+És posible que aquests arxius ja estiguin creats, si ja ho estan podem ignorem aquests pas
+
+Això ho farem de la seguent manera 
+
+```bash
+mkdir .ssh
+```
+
+```bash
+touch .ssh/authorized_keys
+```
+A continuació farem servir la comanda ls amb la ruta que hem especificat previament, en el meu cas és 
+
+```bash
+ls /home/usuari
+```
+
+En la qual podrem veure un archiu anomenat id_rsa.pub
+
+El seguent pas sera veure que hi ha dins de l'arxiu, això ho farem amb la seguent comanda
+
+```bash
+cat /home/usuari/id_rsa.pub
+```
+
+Podrem veure el segunet
+
+![comanda cat](img/17.png)
+
+Com a ultim pas sera fer la seguent comanda 
+
+```bash
+cat /home/usuari/id_rsa.pub >> .ssh/authorized_keys
+```
+![comanda cat](img/18.png)
+
+Per acabar comprobarem que tot funciona correctament
 
 Un cop fet tot això continuarem amb Windows
 
 ---
 
 # SSH Windows
+
+Un cop que estem a Windows, el primer pas sera instalar el Servidor OpenSSH, 
+
+Per fer això ho farem amb la seguent comanda
+
+Un cop fet això tocara habilitar el servei, això ho farem amb la comanda 
+
+```bash
+Add-WindowsCapability -Online -Name OpenSSH.Server
+```
+
+![Instalant SSH](img/19.png)
+
+Un cop fet això reiniciem l'ordinador i arranquem el servei amb la comanda
+
+```bash
+Start-Service sshd
+```
+
+Si volem que el servei s'arranqui automaticament amb la seguent comanda
+
+```bash
+Set-Service -Name sshd -StartupType 'Automatic'
+```
+
