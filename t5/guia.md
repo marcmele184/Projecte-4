@@ -1,15 +1,15 @@
 
 # Guia instalació SSH per linux i windows 
 
-Per poder començar amb la instalació necesitarem les 2 maquines, una linux i una windows.
+Per poder començar amb la instal·lació, necessitarem dues màquines: una amb Linux i una amb Windows.
 
-Començarem amb la guia d'instalació SSH per linux
+Començarem amb la guia d’instal·lació d’SSH per a Linux.
 
 ---
 
 # SSH linux
 
-Un cop que hem instalat la maquina ubuntu colocarem la seguent comanda per poder actualitzar el sistema
+Un cop hem instal·lat la màquina Ubuntu, introduirem la següent comanda per poder actualitzar el sistema.
 
 ```bash
 sudo apt update && sudo apt upgrade -y 
@@ -17,19 +17,19 @@ sudo apt update && sudo apt upgrade -y
 
 **Important**
 
-Si no hem instalat el ssh durant la instalacio de ubuntu farem la seguent comanda
+Si no hem instal·lat l’SSH durant la instal·lació d’Ubuntu, executarem la següent comanda.
 
 ```bash
 sudo apt install ssh
 ```
 
-Un cop que ja tenim instlat el ssh comprovarem si esta activat amb la seguent comanda
+Un cop ja tenim instal·lat l’SSH, comprovarem si està activat amb la següent comanda.
 
 ```bash
 systemctl status ssh
 ```
 
-Si el ssh no esta activat, el podem activar amb la seguent comanda
+Si l’SSH no està activat, el podem activar amb la següent comanda.
 
 ```bash
 systemctl start ssh
@@ -39,55 +39,55 @@ Un cop que podem veure tal i com surt a la foto podrem seguir amb el seguent pas
 
 ![sshactivat](img/2.png)
 
-Un cop que ja tenim instalat el ssh el seguent pas sera veure la nostre ip amb la seguent comanda
+Un cop podem veure que tot és com mostra la imatge, podrem seguir amb el següent pas.
 
 ```bash
 ip addr show
 ```
-Un cop que executem aquesta comanda veurem el seguent:
+Un cop executem aquesta comanda, veurem el següent:
 
 ![comanda per veure la ip](img/1.png)
 
-Ara el seguent pas sera fer la conexio per ssh, en aquest cas ho farem desde una maquina windows, això ho farem amb la seguent comanda 
+Ara, el següent pas serà fer la connexió per SSH. En aquest cas, ho farem des d’una màquina Windows, utilitzant la següent comanda:
 
 ```bash
 ssh usuari@192.168.56.101
 ```
-Ens sortira un missatge com aquest en el qual haurem de escriure "yes" per poder continuar.
+Ens sortirà un missatge com aquest, en el qual haurem d’escriure "yes" per poder continuar.
 
 ![missatge de ssh](img/3.png)
 
-Un cop dins en demanara la contrasenya del usuari
+Un cop dins, ens demanarà la contrasenya de l’usuari.
 
 ![colocar la contrasenya](img/4.png)
 
-Un cop que ja estem dins de la maquina el seguent pas que farem sera modificar l'arxiu de configuració, per poder editar-lo primer escriurem la seguent comanda 
+Un cop ja estem dins de la màquina, el següent pas serà modificar l’arxiu de configuració. Per poder editar-lo, primer escriurem la següent comanda:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
-Editarem l'arxiu perque quedi de la seguent forma
+Editarem l’arxiu perquè quedi de la següent manera:
 
 ![editar l'arxiu de conf](img/6.png)
 
-Una de les configuracions que hem fet és habilitar que el poguis fer servir l'usuari root per fer ssh, per per poder fer primer haurem d'habilitar l'usuari root cosa que ho farem de la seguent forma.
+Una de les configuracions que hem fet és habilitar que l’usuari root pugui fer servir SSH. Per fer-ho, primer haurem d’habilitar l’usuari root, cosa que farem de la següent manera.
 
-Per poder fer això neccesitarem colocar una contrasenya al root, per fer això ho escriurem amb la seguent comanda 
+Per poder fer això, necessitarem assignar una contrasenya al root. Per fer-ho, escriurem la següent comanda:
 
 ```bash
 passwd root
 ```
-Un cop fet aixó ens demana la contrasenya.
+Un cop fet això, ens demanarà la contrasenya.
 
 ![contrasenya del root](img/5.png)
 
-Avans de continuar haurem de reinicar el servei amb la seguent comanda
+Abans de continuar, haurem de reiniciar el servei amb la següent comanda:
 
 ```bash
 systemctl restart ssh
 ```
 
-Quan això ja esta fet podrem inicar sessió amb el root desde ssh fent servir la seguent comanda
+Quan això ja estigui fet, podrem iniciar sessió amb l’usuari root des de SSH, fent servir la següent comanda:
 
 ```bash
 ssh root@192.168.56.101
@@ -95,27 +95,27 @@ ssh root@192.168.56.101
 ![Inicar sessio amb el root](img/7.png)
 
 
-Ara que ja hem comprobat que podem accedir amb l'usuari root per ssh modificarem l'arxiu de configuració per poder afegir una capa de protecció.
+Ara que ja hem comprovat que podem accedir amb l’usuari root per SSH, modificarem l’arxiu de configuració per poder afegir una capa de protecció.
 
-Per començar tornarem al arxiu de configuració
+Per començar, tornarem a l’arxiu de configuració:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
 
-En aquest cas he modificat al arxiu perque no es pogui inicar sessió amb l'usuari root i que unicament és pugi iniciar sessió amb usuari fent que nomes hi hagi un sol usuari per poder fer servir ssh.
+En aquest cas, he modificat l’arxiu perquè no es pugui iniciar sessió amb l’usuari root i només es pugui iniciar sessió amb un usuari, de manera que només hi hagi un usuari autoritzat per fer servir SSH.
 
-Per fer això podem modificar l'arxiu tal i com es veu a la foto
+Per fer això, podem modificar l’arxiu tal i com es veu a la imatge:
 
 ![editar l'arxiu de conf](img/8.png)
 
-Per poder comprobar que funciona correctament crearem un segon usuari amb la seguent comanda
+Per poder comprovar que funciona correctament, crearem un segon usuari amb la següent comanda:
 
 ```bash
 useradd -m -s /bin/bash usuari2
 ```
-Avans de comprobar si funciona haurem de colocar una contrasenya en el usuari2,que ho farem de la seguent manera
+Abans de comprovar si funciona, haurem d’assignar una contrasenya a l’usuari2, cosa que farem de la següent manera:
 
 ```bash
 passwd usuari2
@@ -123,27 +123,27 @@ passwd usuari2
 
 ![Coloquem la contrasenya](img/9.png)
 
-Tot seguit comprobarem si podem realitzar ssh amb usuari2, per fer això farem la seguent comanda:
+Tot seguit, comprobarem si podem realitzar SSH amb l’usuari2. Per fer això, executarem la següent comanda:
 
 ```bash
 ssh usuari2@192.168.56.101
 ```
 
-Si intentem inicar sessio amb usuari2 per ssh podem veure que no es pot
+Si intentem iniciar sessió amb l’usuari2 per SSH, podem veure que no és possible.
 
 ![Fer ssh usuari2](img/10.png)
 
-Tambe hem canviar l'arxiu fent que l'usuari root no pogui inicar sesio per ssh però si que pot fer login per local, per comprobar això primer intentarem fer ssh amb l'usuari root amb la segunet comanda 
+També hem modificat l’arxiu perquè l’usuari root no pugui iniciar sessió per SSH, però sí que pugui fer login localment. Per comprovar això, primer intentarem fer SSH amb l’usuari root amb la següent comanda:
 
 ```bash
 ssh root@192.168.56.101
 ```
 
-I podem veure que ens dona error.
+I podem veure que ens dóna un error.
 
 ![Fer ssh amb root](img/11.png)
 
-En canvi si ho fem en local amb la comanda login podem veure que si que podrem inicar sessio, això ho farem amb la seguent comanda:
+En canvi, si ho fem en local amb la comanda login, podem veure que sí que podrem iniciar sessió. Això ho farem amb la següent comanda:
 
 ```bash
 login root
@@ -151,49 +151,49 @@ login root
 
 ![login amb root](img/12.png)
 
-Per tant podem confirmar que l'arxiu de configuració que hem editat previament funciona correctament.
+Per tant, podem confirmar que l’arxiu de configuració que hem editat prèviament funciona correctament.
 
-Mentre que amb usuari si que podem fer ssh
+Mentrestant, amb l’usuari normal sí que podem fer SSH.
 
 ![ssh amb usuari](img/13.png)
 
-Ara com ultim pas el que farem sera accedir amb un certificat en lloc de tindre que fer servir l'usuari i contrasenya
+Ara, com a últim pas, el que farem serà accedir amb un certificat en lloc de tenir que fer servir l’usuari i la contrasenya.
 
-Per fer això el primer pas sera obrir el powershell del client i escriure la seguent comanda
+Per fer això, el primer pas serà obrir el PowerShell del client i escriure la següent comanda:
 
 ```bash
 ssh-keygen -t rsa
 ```
-Un cop escrita la comanda farem enter fins que vellem algo semblant a la foto
+Un cop escrita la comanda, premem Enter fins que veiem alguna cosa semblant a la imatge:
 
 ![foto del keygen](img/14.png)
 
-El seguent pas sera fer ls a la ruta on s'ha guardat, la ruta per defecta ens surt on la comanda d'avans, en el meu cas sera la seguent
+El següent pas serà fer ls a la ruta on s’ha guardat. La ruta per defecte apareix a la sortida de la comanda anterior; en el meu cas, serà la següent:
 
 ```bash
 ls C:\Users\cfgm2smxb19\.ssh
 ```
 
-Podrem veure algo com això
+Podrem veure alguna cosa com això:
 
 ![comanda ls](img/15.png)
 
-I per ultim la seguent comanda sera
+I, per últim, la següent comanda serà:
 
 ```bash
 scp C:\Users\cfgm2smxb19\.ssh\id_rsa.pub usuari@192.168.56.101:/home/usuari
 ```
-Podrem veure una cosa com la seguent
+Podrem veure una cosa com la següent:
 
 ![comanda scp](img/16.png)
 
-Un cop acabat això anirem al servidor ubuntu
+Un cop acabat això, anirem al servidor Ubuntu.
 
-I per començar farem les haurem de crear la carpeta ssh i un arxiu dins de la carpeta que s'anomeni authorized_keys
+Per començar, haurem de crear la carpeta ssh i un arxiu dins d’aquesta carpeta anomenat authorized_keys.
 
-És posible que aquests arxius ja estiguin creats, si ja ho estan podem ignorem aquests pas
+És possible que aquests arxius ja estiguin creats; si ja ho estan, podem ignorar aquest pas.
 
-Això ho farem de la seguent manera 
+Això ho farem de la següent manera:
 
 ```bash
 mkdir .ssh
@@ -202,60 +202,125 @@ mkdir .ssh
 ```bash
 touch .ssh/authorized_keys
 ```
-A continuació farem servir la comanda ls amb la ruta que hem especificat previament, en el meu cas és 
+A continuació, farem servir la comanda ls amb la ruta que hem especificat prèviament; en el meu cas, és:
 
 ```bash
 ls /home/usuari
 ```
 
-En la qual podrem veure un archiu anomenat id_rsa.pub
+En la qual podrem veure un arxiu anomenat id_rsa.pub
 
-El seguent pas sera veure que hi ha dins de l'arxiu, això ho farem amb la seguent comanda
+El següent pas serà veure què hi ha dins de l’arxiu, això ho farem amb la següent comanda:
 
 ```bash
 cat /home/usuari/id_rsa.pub
 ```
 
-Podrem veure el segunet
+Podrem veure el següent
 
 ![comanda cat](img/17.png)
 
-Com a ultim pas sera fer la seguent comanda 
+Com a últim pas serà fer la següent comanda:
 
 ```bash
 cat /home/usuari/id_rsa.pub >> .ssh/authorized_keys
 ```
 ![comanda cat](img/18.png)
 
-Per acabar comprobarem que tot funciona correctament
+Per acabar, comprobarem que tot funciona correctament.
 
-Un cop fet tot això continuarem amb Windows
+Un cop fet tot això, continuarem amb Windows.
 
 ---
 
 # SSH Windows
 
-Un cop que estem a Windows, el primer pas sera instalar el Servidor OpenSSH, 
+Un cop estem a Windows, el primer pas serà instal·lar el servidor OpenSSH.
 
-Per fer això ho farem amb la seguent comanda
-
-Un cop fet això tocara habilitar el servei, això ho farem amb la comanda 
+Per fer això, ho farem amb la següent comanda:
 
 ```bash
 Add-WindowsCapability -Online -Name OpenSSH.Server
 ```
-
 ![Instalant SSH](img/19.png)
 
-Un cop fet això reiniciem l'ordinador i arranquem el servei amb la comanda
+Un cop ja tenim instal·lat, farem servir el winget per acabar d’instal·lar SSH.
+
+Per començar, haurem de saber la ID del paquet que volem instal·lar; per poder fer això, farem servir la següent comanda:
+
+```bash
+winget search openssh
+```
+![Winget search](img/20.png)
+
+Un cop ja sabem la ID, únicament farem la següent comanda per poder instal·lar el paquet:
+
+```bash
+winget install Microsoft.OpenSSH.Preview
+```
+![wingetinstall](img/21.png)
+
+Un cop fet això, tocarà habilitar el servei; això ho farem amb la comanda:
 
 ```bash
 Start-Service sshd
 ```
 
-Si volem que el servei s'arranqui automaticament amb la seguent comanda
+Si volem que el servei s’iniciï automàticament, farem servir la següent comanda:
 
 ```bash
 Set-Service -Name sshd -StartupType 'Automatic'
 ```
 
+Un cop ja tenim tot això fet, el següent pas serà desactivar el firewall de Windows per estalviar problemes. Per fer això, anirem a la configuració del firewall i el desactivarem.
+
+![mostra de firewall](img/22.png)
+
+Un cop fet això, provarem de connectar-nos per SSH des de la nostra màquina Linux a la màquina Ubuntu. Per fer això, anirem a la nostra màquina Linux i farem servir la següent comanda:
+
+```bash
+ssh usuari@192.168.56.102
+```
+Per saber la IP, farem ipconfig a la màquina Windows.
+
+![ssh a ubuntu](img/23.png)
+
+![terminal de ubuntu amb ssh de windows](img/24.png)
+
+---
+
+# Túnel de SSH
+
+Per acabar, farem un túnel fent servir SSH. En aquest cas, farem servir Ubuntu com a servidor i Windows com a client; per tant, el primer pas serà executar la següent comanda:
+
+```bash
+ssh -D 9876 usuari@192.168.56.101
+```
+
+![Fem ssh](img/25.png)
+
+El següent pas serà editar les propietats de la xarxa.
+
+![Propietats de la xarxa](img/26.png)
+
+Per començar, anirem a la configuració de LAN. Haurem d’editar tal com es veu a la imatge i continuarem anant a Opciones avanzadas.
+
+![Propietats de la xarxa](img/27.png)
+
+Editarem la part final, en la qual haurem de col·locar la IP del servidor i el port que hem escollit prèviament.
+
+![Propietats de la xarxa](img/28.png)
+
+Un cop fet tot això, instal·larem Wireshark per poder comprovar que tot el trànsit que generem en navegar surt via SSH cap al servidor SSH.
+
+Podem veure que, si fem un ping a Google des de la terminal, podrem veure els paquets que van xifrats.
+
+Per poder fer el ping, farem la següent comanda:
+
+```bash
+ping google.com
+```
+
+Un cop fem el ping, anirem a Wireshark i podrem veure que els paquets van xifrats.
+
+![Whireshark](img/29.png)
