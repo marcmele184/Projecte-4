@@ -28,3 +28,9 @@ En aquest repositori tens la descripció de la tasca a realitzar:
  [https://somebooks.es/nfs-parte-2-instalacion-en-un-cliente-ubuntu-20-04-lts/](https://somebooks.es/nfs-parte-2-instalacion-en-un-cliente-ubuntu-20-04-lts/)
 
 Network File System (NFS). (s. f.). Ubuntu Server. [https://documentation.ubuntu.com/server/how-to/networking/install-nfs/](https://documentation.ubuntu.com/server/how-to/networking/install-nfs/)
+
+---
+
+## Guia
+
+[Guia instalació SSH per Ubuntu i Windows](guia.md)
