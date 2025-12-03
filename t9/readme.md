@@ -33,4 +33,4 @@ Network File System (NFS). (s. f.). Ubuntu Server. [https://documentation.ubuntu
 
 ## Guia
 
-[Guia instalació SSH per Ubuntu i Windows](guia.md)
+[Guia servidor NFS](guia.md)
