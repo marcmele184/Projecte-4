@@ -10,3 +10,16 @@ Per mostrar al client com quedarà la solució proposada a partir de les seves d
 
 Crearàs un servidor NFS (NFSv3) i un client Linux que consumeixi els recursos compartits. Hauràs de crear usuaris i grups per simular l'entorn del client i demostrar el control d'accés utilitzant les opcions d'exportació (/etc/exports) i els permisos del sistema de fitxers (chmod, chown).
 
+
+---
+
+Per començar en aquesta guia hem de tindre 2 maquines, en aquest cas tindrem un ubuntu server i un zorin per simular el clinet.
+
+Un cop que ja tenim les dues maquines instalades començarem configuran el servidor.
+
+La primera comanda que farem sera per actualitzar els paquets.
+
+```bash
+sudo apt update && sudo apt upgrade -y 
+```
+
