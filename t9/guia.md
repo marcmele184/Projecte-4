@@ -58,3 +58,35 @@ Un cop que ja tenim els grups creats el seguent pas sera crear l'usuari dev01 qu
 ```bash
 useradd -G devs -m -s /bin/bash dev01
 ```
+
+Tot seguit farem el mateix per l'usuari admin01, en la qual farem la seguent comanda
+
+```bash
+useradd -G admin -m -s /bin/bash admin01
+```
+
+Per confirmar que estan creats correctament tornarem a fer servir el grep
+
+```bash
+grep dev01 /etc/passwd
+```
+
+```bash
+grep admin01 /etc/passwd
+```
+
+![imatge dels usuaris](img/2.png)
+
+Un cop que ja hem creat els grups i els usuaris, el seguent pas sera crear el directori per als projectes de desenvolupament en la qual la ruta que ens demana és la seguent /srv/nfs/dev_projects, per crear les totes les carpetas d'una sola comanda farem el seguent:
+
+```bash
+mkdir /srv/nfs/dev_projects -p
+```
+
+Un cop fet això crearem el directori per a les eines d'administració en la qual la ruta sera /srv/nfs/admin_tools
+
+```bash
+mkdir /srv/nfs/admin_tools
+```
+
+![Creació de carpetas](img/3.png)
