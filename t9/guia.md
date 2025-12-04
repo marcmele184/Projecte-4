@@ -100,7 +100,7 @@ chown root:devs /srv/nfs/dev_projects
 ```
 
 ```bash
-chown root:admin /srv/nfs/admin_tools/
+chown root:admin /srv/nfs/admin_tools
 ```
 
 Un cop fet això assignare els permisos de la carpeta amb la comanda chmod
@@ -117,8 +117,33 @@ Per comprobar que els permisos estan correctas farem ls -l per poder veure els p
 
 ![Permisos de la carpeta](img/4.png)
 
-Avans de continuar amb el servidor crearem els grups i usuaris dins de la maquina client, en aquest cas una maquina zorin
+Avans de continuar amb el servidor crearem els grups i usuaris dins de la maquina client, en aquest cas una maquina zorin.
 
+Per poder crear els grups i usuaris farem servir la aplicació "users and groups"
 
+![aplicació](img/5.png)
 
-Un cop fet això instalarem els paquets neccesairs del servei NFS al servidor
+Per comporbar que tots els grups s'han creat correctament farem servir el grep tal i com hem fet avans
+
+![grups](img/6.png)
+
+![usuaris](img/7.png)
+
+Hem de comprobar que els numeros UID i GID (els números d'identificació) coincideixin a les dues màquines.
+
+Un cop fet això instalarem els paquets neccesairs del servei NFS al servidor, per fer això farem la seguent comanda
+
+```bash
+apt install nfs-kernel-server -y
+```
+Per comprobar que s'ha instalat correctament podem fer un systemctl status
+
+```bash
+systemctl status nfs-kernel-server
+```
+
+![status](img/8.png)
+
+---
+
+A continuació farem una prova 1 (L'error comú)
