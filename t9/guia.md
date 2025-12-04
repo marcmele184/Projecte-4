@@ -90,3 +90,35 @@ mkdir /srv/nfs/admin_tools
 ```
 
 ![Creació de carpetas](img/3.png)
+
+Per ultim configurarem els permisos de les carpetas, en aquest cas seran els seguent.
+
+Chown per canviar la propietat de la carpeta
+
+```bash
+chown root:devs /srv/nfs/dev_projects
+```
+
+```bash
+chown root:admin /srv/nfs/admin_tools/
+```
+
+Un cop fet això assignare els permisos de la carpeta amb la comanda chmod
+
+```bash
+chmod 770 /srv/nfs/dev_projects
+```
+
+```bash
+chmod 770 /srv/nfs/admin_tools
+```
+
+Per comprobar que els permisos estan correctas farem ls -l per poder veure els permisos de cada carpeta
+
+![Permisos de la carpeta](img/4.png)
+
+Avans de continuar amb el servidor crearem els grups i usuaris dins de la maquina client, en aquest cas una maquina zorin
+
+
+
+Un cop fet això instalarem els paquets neccesairs del servei NFS al servidor
