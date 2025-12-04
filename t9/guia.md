@@ -15,6 +15,8 @@ Crearàs un servidor NFS (NFSv3) i un client Linux que consumeixi els recursos c
 
 Per començar en aquesta guia hem de tindre 2 maquines, en aquest cas tindrem un ubuntu server i un zorin per simular el clinet.
 
+Les dues maquines han de tindre 2 interifices, la primera NAT i la segona host only.
+
 Un cop que ja tenim les dues maquines instalades començarem configuran el servidor.
 
 La primera comanda que farem sera per actualitzar els paquets.
@@ -23,3 +25,22 @@ La primera comanda que farem sera per actualitzar els paquets.
 sudo apt update && sudo apt upgrade -y 
 ```
 
+Un cop que ja tenim actualitzat els paquets, el seguent pas sera començar amb la creació de l'estructura de carpetas, de grups i usuaris.
+
+El primer que farem sera crear els grups neccesaris, en aquest cas en demana que crem 2 grups, el primer devs i el segon admin
+
+Per crear aquest grups farem la seguent comanda 
+
+```bash
+groupadd devs
+```
+
+```bash
+groupadd admin
+```
+
+Per comporbar que l'arxiu s'ha creat correctament farem servir el greep per buscar tant el grup devs com admin dins de l'arxiu /etc/groups, per fer-ho farem la seguent comanda
+
+```bash
+grep devs /etc/group
+```
