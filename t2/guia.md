@@ -87,4 +87,14 @@ escollirem els fitxers que volem restaurar, en aquest cas la carpeta documents
 
 ![Escollir documents](img/18.png)
 
-Farem siguiente siguiente i un cop que 
+Farem siguiente siguiente i un cop fet això ja tindrem feta la restauració 
+
+![Restauració feta](img/19.png)
+
+![Restauració feta](img/20.png)
+
+Per poder restaurar la copia que hem fet a google drive ho farem igual però selecionarem l'altre copia
+
+---
+
+Part 2: Còpia seguretat servidor Linux
