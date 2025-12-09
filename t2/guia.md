@@ -30,4 +30,4 @@ Un cop instalat, s'obrira una pestanya en el nostre navegador en el qual ens dem
 
 En la qual podem escollir qualsevol contrasenya ja que sera personal, important no olvidar-la
 
-![duplicati](img/5.png)
+![duplicati](img/6.png)
