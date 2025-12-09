@@ -86,3 +86,5 @@ Escollirem la copia que volem restaurar, en aquest cas proba
 escollirem els fitxers que volem restaurar, en aquest cas la carpeta documents
 
 ![Escollir documents](img/18.png)
+
+Farem siguiente siguiente i un cop que 
