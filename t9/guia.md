@@ -144,6 +144,58 @@ systemctl status nfs-kernel-server
 
 ![status](img/8.png)
 
+Per començar editarem l'arxiu /etc/exports per poder decidir quins arxius volem exportar, en aquest cas volem exporta tota la carpeta /srv/nfs
+
+Afegirem una linia adicional al final del arxiu, en aquest cas sera la seguent 
+
+```bash
+/srv/nfs *(rw,sync,no_subtree_check)
+```
+
+![arxiu de configuració](img/9.png)
+
+Per poder aplicar el canvis haurem de reinciar el servei amb la comanda
+
+```bash
+systemctl restart nfs-kernel-server
+```
+Un cop fet això l'iniciem i comprobarem que tot funciona correctament 
+
+En el servidor podem fer la comanda 
+
+```bash
+exportfs -u
+```
+Amb la qual podrem veure quins arxius es poden exportar
+
+![comanda](img/10.png)
+
+Tambe podem fer la seguent comanda per veure des-de quin port treballa, en aquest cas ho fa amb el port 2049
+
+```bash
+rpcinfo -p 192.168.56.101
+```
+![comanda](img/11.png)
+
+Per poder comprobar en la maquina haurem d'instalar el paquet nfs-common, això ho farem amb la seguent comanda
+
+```bash
+sudo apt install nfs-common -y
+```
+
+Un cop fet això en conectarem al servidor amb la comanda showmount -e IP
+
+En el meu cas sera la seguent comanda 
+
+```bash
+showmount -e 192.168.56.101
+```
+
+![comanda](img/12.png)
+
+En la qual podem veure que la carpeta /srv/nfs
+
 ---
 
-A continuació farem una prova 1 (L'error comú)
+A continuació farem una prova 1 (L'error comú) exportarem el directori /srv/nfs/admin_tools amb les opcions 'rw,sync'.
+
