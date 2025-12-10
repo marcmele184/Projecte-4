@@ -197,5 +197,18 @@ En la qual podem veure que la carpeta /srv/nfs
 
 ---
 
-A continuació farem una prova 1 (L'error comú) exportarem el directori /srv/nfs/admin_tools amb les opcions 'rw,sync'.
+A continuació farem una prova 1 (L'error comú)
 
+Previament ja hem exportat l'arxiu /srv/nfs per tant el seguent pas que hem de fer sera muntar aquest recurs a la carpeta /mnt/admin_tools, en un principi aquesta carpeta no existeix, per tant el primer pas sera crear-la, això ho farem amb la seguent comanda
+
+```bash
+mkdir /mnt/admin_tools 
+```
+
+![Creació de la carpeta](img/13.png)
+
+Un cop que tenim creada la carpeta, el seguent pas sera muntar el recurs, això ho farem amb la comanda mount 
+
+```bash
+mount
+```
