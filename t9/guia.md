@@ -210,5 +210,19 @@ mkdir /mnt/admin_tools
 Un cop que tenim creada la carpeta, el seguent pas sera muntar el recurs, això ho farem amb la comanda mount 
 
 ```bash
-mount
+mount -t nfs 192.168.56.101:/srv/nfs/admin_tools /mnt/admin_tools
 ```
+
+Podrem veure que la carpeta esta creada correctament
+
+![Carpeta](img/14.png)
+
+Però si entrem a la carpeta ens dira que no tenim permisos, això a causa de que no tenim "no_root_squash" per tant l'usuari root de la maquina client no és el mateix root que en el servidor, això es fa per afegir una capa de seguretat extra.
+
+![Carpeta](img/15.png)
+
+A continuació ensenyare com podem solucionar això
+
+Prova 2 (La Solució)
+
+
