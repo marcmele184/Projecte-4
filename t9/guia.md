@@ -13,6 +13,8 @@ Crearàs un servidor NFS (NFSv3) i un client Linux que consumeixi els recursos c
 
 ---
 
+# Fase 1: Preparació de l'entorn
+
 Per començar en aquesta guia hem de tindre 2 maquines, en aquest cas tindrem un ubuntu server i un zorin per simular el clinet.
 
 Les dues maquines han de tindre 2 interifices, la primera NAT i la segona host only.
@@ -26,6 +28,10 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 Un cop que ja tenim actualitzat els paquets, el seguent pas sera començar amb la creació de l'estructura de carpetas, de grups i usuaris.
+
+---
+
+# Fase 2: Preparació del servidor
 
 El primer que farem sera crear els grups neccesaris, en aquest cas en demana que crem 2 grups, el primer devs i el segon admin
 
@@ -197,6 +203,8 @@ En la qual podem veure que la carpeta /srv/nfs
 
 ---
 
+# Fase 3: L'Exportació d'Administració (El Dilema del root_squash)
+
 A continuació farem una prova 1 (L'error comú)
 
 Previament ja hem exportat l'arxiu /srv/nfs per tant el seguent pas que hem de fer sera muntar aquest recurs a la carpeta /mnt/admin_tools, en un principi aquesta carpeta no existeix, per tant el primer pas sera crear-la, això ho farem amb la seguent comanda
@@ -213,16 +221,65 @@ Un cop que tenim creada la carpeta, el seguent pas sera muntar el recurs, això 
 mount -t nfs 192.168.56.101:/srv/nfs/admin_tools /mnt/admin_tools
 ```
 
-Podrem veure que la carpeta esta creada correctament
+Podrem veure no podem crear cap arxiu ja que no tenim els pemisos ja que el root de la maquina client i el root del servidor no es el mateix
 
 ![Carpeta](img/14.png)
 
-Però si entrem a la carpeta ens dira que no tenim permisos, això a causa de que no tenim "no_root_squash" per tant l'usuari root de la maquina client no és el mateix root que en el servidor, això es fa per afegir una capa de seguretat extra.
+Mentre que si intentem crear un arxiu amb l'usuari admin si que podrem, ja que aquest usuari si que te permisos en aquesta carpeta
 
 ![Carpeta](img/15.png)
 
-A continuació ensenyare com podem solucionar això
+Podem veure que l'arxiu que hem creat es propietat de admin01
+
+![Carpeta](img/17.png)
+
+A continuació ensenyare com fer per poder crear arxius amb root
 
 Prova 2 (La Solució)
 
+Per començar haurem d'editar l'arxiu /etc/exports en el qual substituirem la linia que hem escrit previament per les seguents.
 
+```bash
+/srv/nfs/admin_tools *(rw,sync,no_subtree_check,no_root_squash)
+/srv/nfs/dev_projects *(rw,sync,no_subtree_check)
+```
+
+Un cop fet això reiniciem el servei un altre cop amb la comanda 
+
+```bash
+systemctl restart nfs-kernel-server
+```
+
+A continuació haurem de desmuntar i muntar un altre cop el recurs, en el meu cas la comanda per desmuntar sera 
+
+```bash
+umount -t nfs 192.168.56.101:/srv/nfs/admin_tools /mnt/admin_tools
+```
+I per muntar
+
+```bash
+mount -t nfs 192.168.56.101:/srv/nfs/admin_tools /mnt/admin_tools
+```
+
+Un cop fet això podrem crear un now arxiu, per exemple en aquest cas he creat una arxiu anomenat file2
+
+![Carpeta](img/16.png)
+
+![Carpeta](img/18.png)
+
+Això a causa de que hem modificat l'arxiu /etc/exports fent que el root de la maquina fisica sigui el mateix que el root del servidor, per tant tenim total llibertat 
+
+---
+
+# Fase 4: L'Exportació de Desenvolupament (Permisos rw vs ro)
+
+A continuació el client ens demana el seguent la xarxa d'administració (p.ex., 192.168.56.0/24) hi pugui escriure, però que la xarxa de consultors (p.ex., 192.168.56.100) només pugui llegir.
+
+Per poder fer això haurem de modificar l'arxiu /etc/exports i substituir la linia "/srv/nfs/dev_projects *(rw,sync,no_subtree_check)" per les seguents 
+
+```bash
+/srv/nfs/dev_projects 192.168.56.0/24(rw,sync,no_subtree_check)
+/srv/nfs/dev_projects 192.168.56.100/24(ro,sync,no_subtree_check)
+```
+
+Això ho fem per poder assignar permisos depened de la ip que tingui l'usuari
