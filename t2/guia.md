@@ -98,3 +98,94 @@ Per poder restaurar la copia que hem fet a google drive ho farem igual però sel
 ---
 
 Part 2: Còpia seguretat servidor Linux
+
+Per poder començar haurem de tindre una maquina linux, en aquest cas farem servir una maquina ubuntu server per realitzar la prova.
+
+El primer pas sera tindre la maquina actualitzada per tant farem 
+
+```bash
+sudo apt update && sudo apt upgrade -y 
+```
+
+Farem servir el Duplicity  per poder fer copies en local i en remot.
+
+Per començar haurem de tindre un disc secundari, en aquest cas farem servir un disc de 10 Gb
+
+Un cop que ja tenim el disc, el primer pas sera donar-li un format, li donarem el format xfs i muntarem al disc a la ruta /media/backup com que aquesta ruta no existeix, el primer pas sera crear la ruta, això ho farem de la seguent forma
+
+```bash
+mkdir /media/backup -p
+```
+
+![carpeta de backup](img/21.png)
+
+Un cop fet això haurem de donar-li format al disc, això ho farem amb l'eina fdisk, per tant el primer pas sera 
+
+```bash
+sudo apt install fdisk
+```
+Un cop fet això farem fdisk -l per veure el disc que tenim
+
+```bash
+fdisk -l
+```
+
+![Comanda fdisk -l](img/22.png)
+
+Podem veure que el segon disc esta, per tant el seguent pas sera crear el seu volum, per fer això farem servir la comanda pvcreate, per poder fer servir aquesta comanda primer haurem d'instalar lvm2 
+
+```bash
+sudo apt install lvm2
+```
+
+Un cop fet això ja podrem crear el volum en aquest cas sera amb la seguent comanda
+
+```bash
+pvcreate /dev/sdb
+```
+
+![Crear el volum](img/23.png)
+
+Un cop que ja tenim el volum muntat el seguent pas sera formategar-lo amb la seguent comanda
+
+```bash
+mkfs.xfs -f /dev/sdb
+```
+
+![Formategar el volum](img/24.png)
+
+Per ultim tocara muntar el disc a la carpeta que hem crear previament, per fer axò farem la seguent comanda
+
+```bash
+mount /dev/sdb /media/backup
+```
+![Muntar el disc](img/25.png)
+
+Un cop que ja tenim el disc muntat el seguent pas sera instalar Duplicity
+
+```bash
+apt install duplicity -y
+```
+
+Un cop fet això el seguent pas sera crear un parell d’usuaris amb carpeta personal i crear 4 arxius de 10 MB a la carpeta home del teu usuari.
+
+per fer això ho farem de la seguent forma
+
+```bash
+useradd -m -s /bin/bash user1
+```
+
+```bash
+useradd -m -s /bin/bash user2
+```
+![Crear usuaris](img/26.png)
+![Comprobar usuaris](img/27.png)
+
+```bash
+touch file1
+touch file2
+touch file3
+touch file4
+```
+![Comprobar arxius](img/28.png)
+
