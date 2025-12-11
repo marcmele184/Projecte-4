@@ -299,7 +299,7 @@ El primer pas sera crear la carpeta amb la seguent comanda
 mkdir /mnt/dev_projects
 ```
 
-El seguent pas que farem sera modificar la nostre ip, en aquest cas probarem amb la ip ```192.168.56.103``` per poder fer això anirem a la configuració de xarxa i colocarem la ip manualment i muntarem el disc
+El seguent pas que farem sera modificar la nostre ip, en aquest cas probarem amb la ip ```192.168.56.128``` per poder fer això anirem a la configuració de xarxa i colocarem la ip manualment i muntarem el disc
 
 ![Configuració de xarxa](img/20.png)
 
@@ -307,6 +307,23 @@ Un cop fet això si fem login l'usuari dev01 com que tenim una ip dins del rang 
 
 ![Creació d'arxiu](img/22.png)
 
-Mentre que canviem la ip i coloquem per exemple ```192.168.56.102``` podrem observar que no podem editar els arxius però si que podem veure que hi ha a la carpeta, haurem de tornar a desmuntar i muntar el disc
+Mentre que canviem la ip ```192.168.56.140``` podrem observar que no podem editar els arxius però si que podem veure que hi ha a la carpeta, haurem de tornar a desmuntar i muntar el disc
 
 ![Canvi d'IP](img/23.png)
+
+Podrem veure que podem accedir a la carpeta i veure que hi ha dins però no podrem modificar el contigut ja que nomes tenim permisos de lectura
+
+![permisos](img/24.png)
+
+Ara per ultim farem login amb l'usuari admin01 i intentarem crear un arxiu en la carpeta dev_projects
+
+![permisos](img/25.png)
+
+Podem veure que no podem crear cap arxius dins de la carpeta dev_projects ja que no tenim els permisos neccesaris ja que l'usuari admin01 no forma part del grup dev01
+
+---
+
+# Fase 5: Muntatge Automàtic amb /etc/fstab
+
+
+Ara per ultim modificarem l'arxiu /etc/fstab per poder configurar que els
