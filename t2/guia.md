@@ -114,7 +114,7 @@ Per començar haurem de tindre un disc secundari, en aquest cas farem servir un 
 Un cop que ja tenim el disc, el primer pas sera donar-li un format, li donarem el format xfs i muntarem al disc a la ruta /media/backup com que aquesta ruta no existeix, el primer pas sera crear la ruta, això ho farem de la seguent forma
 
 ```bash
-mkdir /media/backup -p
+mkdir /media/backup 
 ```
 
 ![carpeta de backup](img/21.png)
@@ -182,10 +182,39 @@ useradd -m -s /bin/bash user2
 ![Comprobar usuaris](img/27.png)
 
 ```bash
-touch file1
-touch file2
-touch file3
-touch file4
+fallocate -l 10MB file1
+fallocate -l 10MB file2
+fallocate -l 10MB file3
+fallocate -l 10MB file4
 ```
 ![Comprobar arxius](img/28.png)
 
+
+Un cop que ja tenim els arxius de prova creats els seguent pas sera fer la copia de seguretat, això ho farem amb el duplicity
+
+La comanda per fer una copia de seguretat completa de la carpeta home sera la seguent 
+
+```bash
+duplicity full /home/user file:///media/backup/
+```
+En el moment en que ens demana el passphrase podem escollir el que nosaltres volguem, ja que és una prova en el meu cas he escollit copia
+
+![Fer la copia](img/29.png)
+
+Podem veure que la copia s'ha creat correctament en el disc secundari, això amb la comanda ls
+
+![veure la copia](img/30.png)
+
+Un cop fet això el seguent pas sera esborrar els arxius i comprobar que funcionen correctament
+
+![Esborrar arxius](img/31.png)
+
+Un cop que ja no estan els arxius farem servir la copia per recuperar-los, en aquest cas guardarem la copia dins d'una carpeta que es diu copia dins de la carpeta ```/home/user``` això ho farem amb la seguent comanda:
+
+```bash
+duplicity restore file:///media/backup/ /home/user/copia
+```
+
+![Copia feta](img/32.png)
+
+A continuació farem una copia incremental, per començar crearem un arxiu de 4mb
