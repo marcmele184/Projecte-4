@@ -350,3 +350,6 @@ Un cop fet això reiniciem la maquina i confirmem que discos s'han muntat correc
 
 # Conclusió
 
+Per poder millorar aquest producte podriem millorar els seguents apartats, per exempla un dels problemes és que s'han de crear els usuaris i grups al servidor i a la maquina client, això no es optim ja que en un entorn real en el qual podrien haber més de 20 ordinadors de part del client. Basicament seria repetir el mateix pas 21 vegades (20 per els client i 1 per el servidor)
+
+Una solució real per aquest problema seria centralitzar i fer un unic lloc en el qual hi hagin les dades per inicar sessió com per exemple LDAP aixì per evitar feina innecesaria.
