@@ -285,6 +285,8 @@ Un cop dins afegirem aquesta linia
 0 23 * * 0 /home/usuari/fullbackup.sh
 ```
 
+![Donar permisos](img/35.png)
+
 A continuació farem l'script de copia incremental, per començar crearem l'arxiu anomenat ```incrementalbackup.sh```
 
 Un cop dins escriurem el seguent 
