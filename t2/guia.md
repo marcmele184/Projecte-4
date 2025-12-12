@@ -195,7 +195,7 @@ Un cop que ja tenim els arxius de prova creats els seguent pas sera fer la copia
 La comanda per fer una copia de seguretat completa de la carpeta home sera la seguent 
 
 ```bash
-duplicity full /home/user file:///media/backup/
+duplicity full /home file:///media/backup/
 ```
 En el moment en que ens demana el passphrase podem escollir el que nosaltres volguem, ja que és una prova en el meu cas he escollit copia
 
@@ -209,11 +209,13 @@ Un cop fet això el seguent pas sera esborrar els arxius i comprobar que funcion
 
 ![Esborrar arxius](img/31.png)
 
-Un cop que ja no estan els arxius farem servir la copia per recuperar-los, en aquest cas guardarem la copia dins d'una carpeta que es diu copia dins de la carpeta ```/home/user``` això ho farem amb la seguent comanda:
+Un cop que ja no estan els arxius farem servir la copia per recuperar-los, això ho farem amb la seguent comanda:
 
 ```bash
-duplicity restore file:///media/backup/ /home/user/copia
+duplicity restore --force file:///media/backup/ /home
 ```
+
+Podem veure que s'han restaurat correctament
 
 ![Copia feta](img/32.png)
 
