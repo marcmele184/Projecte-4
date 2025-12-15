@@ -17,3 +17,10 @@ Aquesta documentaci√≥ ha de ser extremadament clara. Penseu que un client nervi√
 **Materials i links de suport**
 
 Moodle 0227 Serveis de Xarxa. UD4.AA3 Escriptoris Remots
+
+
+---
+
+# Guia
+
+[guia.md](guia.md)
