@@ -29,7 +29,7 @@ sudo apt update && sudo apt upgrade -y
 
 Un cop que ja tenim actualitzat els paquets, el següent pas sera començar amb la creació de l'estructura de carpetes, de grups i usuaris.
 
-Avans de continuar hem de confirmar que les maquines es poden veure entre si, això ho farem amb un ping
+Abans de continuar hem de confirmar que les màquines es poden veure entre si, això ho farem amb un ping.
 
 ![ping](img/28.png)
 
