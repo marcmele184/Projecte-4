@@ -71,6 +71,6 @@ Ha d'incloure (amb captures de pantalla molt clares):
 
 [Fase 1:](1.md)
 
-[Guia per el tecnic:](2.md)
+[Guia pel tecnic:](2.md)
 
-[Guia per el client:](3.md)
+[Guia pel client:](3.md)
